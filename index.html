@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gargi Parlikar — Data Analyst</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --bg1: #0f1720;
+      --bg2: #111827;
+      --accent: #00eaff;
+      --muted: #9ca3af;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.05);
+      --glass-strong: rgba(0,0,0,0.52);
+      --radius: 14px;
+      --maxwidth: 1100px;
+    }
+
+    body {
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:linear-gradient(160deg,var(--bg1),var(--bg2));
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    .wrap {
+      max-width:var(--maxwidth);
+      margin:auto;
+      padding:20px;
+    }
+
+    /* ======= NEW CENTER HEADER ======= */
+    .top-center-header {
+      text-align:center;
+      margin-top:35px;
+      margin-bottom:25px;
+      animation:fadeUp 1.2s ease both;
+    }
+    .top-center-header .name {
+      font-size:42px;
+      font-weight:700;
+      color:var(--accent);
+    }
+    .top-center-header .role {
+      font-size:20px;
+      color:var(--muted);
+      margin-top:8px;
+    }
+
+    /* Buttons */
+    .actions {
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+    .btn {
+      background:linear-gradient(90deg,var(--accent),#7af6e6);
+      color:#062023;
+      padding:10px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:600;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      transition:.25s;
+    }
+    .btn:hover {
+      transform:translateY(-5px) scale(1.05);
+    }
+
+    /* Sections */
+    section {
+      margin:35px 0;
+      padding:22px;
+      border-radius:12px;
+      background:var(--glass);
+    }
+    section h2 {
+      font-size:22px;
+      color:var(--accent);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:10px;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+    .skill {
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .skill .label {font-weight:600}
+    .skill .bar {
+      width:60%;
+      height:10px;
+      border-radius:8px;
+      background:#061018;
+      overflow:hidden;
+    }
+    .bar > i {
+      display:block;
+      height:100%;
+      background:linear-gradient(90deg,var(--accent),#7af6e6);
+      width:0%;
+      transition:width 1.6s ease;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .project {
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:.3s;
+      position:relative;
+    }
+    .project:hover {
+      transform:translateY(-8px);
+    }
+    .project h3 {margin:0 0 8px; color:#bffcff}
+    .project p {color:var(--muted); font-size:14px}
+    .tag {
+      background:rgba(255,255,255,0.08);
+      padding:6px 10px;
+      border-radius:8px;
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    /* ======= CRYSTAL CLEAR MODAL IMPROVED ======= */
+    .modal-backdrop {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.82);
+      backdrop-filter:blur(10px);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:9999;
+      padding:20px;
+    }
+
+    .modal {
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(20px);
+      width:100%;
+      max-width:700px;
+      padding:28px;
+      border-radius:16px;
+      animation:pop 0.35s ease both;
+    }
+
+    .modal header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .modal h3 {
+      margin:0;
+      font-size:24px;
+      color:var(--accent);
+    }
+
+    .modal p {
+      margin-top:16px;
+      font-size:16px;
+      line-height:1.6;
+      color:#e5e7eb;
+    }
+
+    .modal .links {
+      margin-top:20px;
+      display:flex;
+      gap:14px;
+    }
+
+    .primary {
+      padding:10px 16px;
+      background:var(--accent);
+      border-radius:10px;
+      text-decoration:none;
+      color:#062023;
+      font-weight:700;
+    }
+
+    .ghost {
+      padding:10px 16px;
+      background:rgba(255,255,255,0.1);
+      border-radius:10px;
+      text-decoration:none;
+      color:#e5e7eb;
+    }
+
+    #modalClose {
+      cursor:pointer;
+      border:none;
+      background:transparent;
+      color:#fff;
+      font-size:20px;
+    }
+
+    @keyframes fadeUp {from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:none}}
+    @keyframes pop {from{opacity:0; transform:scale(0.92)} to{opacity:1; transform:scale(1)}}
+
+    @media(max-width:768px) {
+      .projects-grid {grid-template-columns:1fr}
+      .skills-grid {grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <!-- ====== NEW CENTERED HEADER ====== -->
+  <div class="top-center-header">
+    <div class="name">Gargi Parlikar</div>
+    <div class="role">Data Analyst</div>
+  </div>
+
+  <div class="actions">
+    <a class="btn" href="GARGI-PARLIKAR-Resume.pdf" target="_blank"><i class="fa-solid fa-file"></i> Resume</a>
+    <a class="btn" href="mailto:parlikargargi51@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+    <a class="btn" href="https://www.linkedin.com/in/gargi-parlikar" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    <a class="btn" href="https://github.com/Gargiparlikar" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+  </div>
+
+  <!-- ===== Hero / Intro ===== -->
+  <section>
+    <h2><i class="fa-solid fa-user"></i> About Me</h2>
+    <p style="color:var(--muted); font-size:16px">
+      I love transforming messy datasets into useful insights using Python, SQL, Power BI, and automated ETL workflows.
+      I analyze, visualize, and deliver data stories that help businesses make smarter decisions.
+    </p>
+  </section>
+
+  <!-- ===== Education ===== -->
+  <section>
+    <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+    <p style="color:var(--muted)">
+      <strong>B.E. Electronics & Telecommunication Engineering</strong><br>
+      TSSM BSCOER, Pune — CGPA: 8.02
+    </p>
+  </section>
+
+  <!-- ===== Skills ===== -->
+  <section>
+    <h2><i class="fa-solid fa-wrench"></i> Skills</h2>
+
+    <div class="skills-grid">
+
+      <div class="skill">
+        <div>
+          <div class="label">Python</div>
+          <div class="small" style="color:var(--muted); font-size:13px">Pandas, NumPy</div>
+        </div>
+        <div class="bar"><i style="width:92%"></i></div>
+      </div>
+
+      <div class="skill">
+        <div>
+          <div class="label">SQL</div>
+          <div class="small" style="color:var(--muted); font-size:13px">MySQL</div>
+        </div>
+        <div class="bar"><i style="width:88%"></i></div>
+      </div>
+
+      <div class="skill">
+        <div>
+          <div class="label">Power BI</div>
+          <div class="small" style="color:var(--muted); font-size:13px">DAX, Modeling</div>
+        </div>
+        <div class="bar"><i style="width:86%"></i></div>
+      </div>
+
+      <div class="skill">
+        <div>
+          <div class="label">Excel</div>
+          <div class="small" style="color:var(--muted); font-size:13px">Dashboarding</div>
+        </div>
+        <div class="bar"><i style="width:90%"></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <h2><i class="fa-solid fa-folder-open"></i> Projects</h2>
+    <p class="sub" style="color:var(--muted); margin-bottom:18px">Click a project to view description</p>
+
+    <div class="projects-grid">
+
+      <!-- Cricket -->
+      <div class="project" data-title="End-to-End Cricket Data Analytics Project"
+           data-desc="Scraped 10,000+ cricket match records using BeautifulSoup & Pandas. Cleaned batting and bowling datasets, built KPIs for performance insights, and designed an interactive Power BI dashboard improving analysis efficiency by 60%."
+           data-link="https://github.com/Gargiparlikar/End-to-End-Cricket-Data-Analytics-Project-">
+        <h3>Cricket Data Analytics</h3>
+        <div class="tag">Python</div> <div class="tag">Web Scraping</div>
+        <p>Scraped & analyzed 10k match records, built Power BI dashboard.</p>
+      </div>
+
+      <!-- Weather -->
+      <div class="project" data-title="Weather Data Analysis"
+           data-desc="Collected weather records from the OpenWeatherMap API, automated ETL using Python, and created Power BI dashboards visualizing temperature, humidity, and forecast trends."
+           data-link="https://github.com/Gargiparlikar/Weather-Data-Analysis-using-OpenWeatherMap-API-Python-Excel-Power-BI">
+        <h3>Weather Data Analysis</h3>
+        <div class="tag">API</div> <div class="tag">Power BI</div>
+        <p>Automated weather data ingestion and dashboard creation.</p>
+      </div>
+
+      <!-- FP&A -->
+      <div class="project" data-title="End-to-End FP&A Dashboard"
+           data-desc="Built financial dashboards with Python automated ETL and Power BI. Created DAX formulas for YTD, variance, and margin KPIs providing executive-level insights."
+           data-link="https://github.com/Gargiparlikar/End-to-End-FP-A-Dashboard-using-Power-BI-Python">
+        <h3>FP&A Dashboard</h3>
+        <div class="tag">Finance</div> <div class="tag">DAX</div>
+        <p>ETL + forecasting dashboards with YTD & variance KPIs.</p>
+      </div>
+
+      <!-- E-Commerce -->
+      <div class="project" data-title="Global E-Commerce Analytics"
+           data-desc="Extracted 10k+ product & customer records via APIs and SQL. Built ETL pipelines and dashboards showing sales, revenue, and customer behavior trends."
+           data-link="https://github.com/Gargiparlikar/Global-E-Commerce-Analytics-Dashboard-API-SQL-Python-">
+        <h3>E-Commerce Analytics</h3>
+        <div class="tag">SQL</div> <div class="tag">API</div>
+        <p>End-to-end ETL + visual KPIs for global e-commerce data.</p>
+      </div>
+
+      <!-- Pizza -->
+      <div class="project" data-title="Pizza Sales Analysis"
+           data-desc="Analyzed 7,000+ pizza orders using SQL and Excel Dashboards. Identified best sellers, peak hours, and category performance."
+           data-link="https://github.com/Gargiparlikar/Pizza-Sales-Analysis-SQL-EXCEL-">
+        <h3>Pizza Sales Analysis</h3>
+        <div class="tag">SQL</div>
+        <p>Excel dashboard showing revenue, orders, categories.</p>
+      </div>
+
+      <!-- Jobs -->
+      <div class="project" data-title="Job Listings Web Scraper"
+           data-desc="Scraped job portals to extract job titles, companies, salaries & location data to create an analysis-ready dataset."
+           data-link="https://github.com/Gargiparlikar/Web-Scraping-Project---Job-Listings-Data-Extraction">
+        <h3>Job Listings Scraper</h3>
+        <div class="tag">Web Scraping</div>
+        <p>Created structured datasets from job websites.</p>
+      </div>
+
+      <!-- Time Series -->
+      <div class="project" data-title="Time Series Forecasting (ARIMA/SARIMAX)"
+           data-desc="Implemented ARIMA & SARIMAX models, performed stationarity checks, forecasted future values with confidence intervals."
+           data-link="https://github.com/Gargiparlikar/Univariate-Time-Series-Forecasting-using-ARIMA-SARIMAX">
+        <h3>Time Series Forecasting</h3>
+        <div class="tag">Forecasting</div>
+        <p>ARIMA + SARIMAX predictions with analytics.</p>
+      </div>
+
+      <!-- Fraud Detection -->
+      <div class="project" data-title="Credit Card Fraud Detection"
+           data-desc="Built ML models identifying fraudulent transactions, using feature engineering, scaling, and precision/recall evaluation."
+           data-link="https://github.com/Gargiparlikar/Credit-Card-Fraud-Detection">
+        <h3>Fraud Detection</h3>
+        <div class="tag">ML</div>
+        <p>Classification model for fraud detection.</p>
+      </div>
+
+      <!-- Churn -->
+      <div class="project" data-title="Telecom Customer Churn Analysis"
+           data-desc="Analyzed telecom customer datasets to identify churn causes and built dashboards showing retention opportunities."
+           data-link="https://github.com/Gargiparlikar/TELECOMMUNICATION--CUSTOMER-CHURN-ANALYSIS">
+        <h3>Customer Churn Analysis</h3>
+        <div class="tag">EDA</div>
+        <p>Identified churn drivers & built BI insights.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== Contact ====== -->
+  <section id="contact">
+    <h2><i class="fa-solid fa-address-card"></i> Contact</h2>
+    <p style="color:var(--muted)">
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:parlikargargi51@gmail.com">parlikargargi51@gmail.com</a><br>
+      <i class="fa-solid fa-phone"></i> 7972622156
+    </p>
+  </section>
+
+  <footer style="text-align:center; color:var(--muted); margin-bottom:20px">© 2025 Gargi Parlikar</footer>
+
+</div>
+
+<!-- ===== MODAL ===== -->
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <header>
+      <h3 id="modalTitle"></h3>
+      <button id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+    </header>
+    <p id="modalDesc"></p>
+    <div class="links">
+      <a id="modalSource" class="primary" target="_blank">Source Code</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal Logic
+  const projects = document.querySelectorAll('.project');
+  const backdrop = document.getElementById('modalBackdrop');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalSource = document.getElementById('modalSource');
+  const modalClose = document.getElementById('modalClose');
+
+  projects.forEach(project => {
+    project.addEventListener('click', () => {
+      modalTitle.textContent = project.dataset.title;
+      modalDesc.textContent = project.dataset.desc;
+      modalSource.href = project.dataset.link;
+      backdrop.style.display = "flex";
+    });
+  });
+
+  modalClose.onclick = () => backdrop.style.display = "none";
+  backdrop.onclick = e => { if (e.target === backdrop) backdrop.style.display = "none"; };
+</script>
+
+</body>
+</html>
