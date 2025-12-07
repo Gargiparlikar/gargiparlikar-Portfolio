@@ -665,8 +665,8 @@
 
         <div class="modal-section">
             <h4><i class="fa-solid fa-list-ol"></i> Methodology & Steps</h4>
-            <ul id="modalSteps" style="color:var(--muted); padding-left: 20px;">
-                </ul>
+            <div id="modalStepsContainer" style="color:var(--muted);">
+            </div>
         </div>
         
         <div class="impact-box">
@@ -681,23 +681,9 @@
 </div>
 
 <script>
-    // Helper function to render steps list
-    function renderSteps(stepsText) {
-        const steps = stepsText.split('. ');
-        let html = '';
-        steps.forEach(step => {
-            if (step.trim()) {
-                // Find and bold the action verb/title (the part before the first colon)
-                const parts = step.split(':');
-                if (parts.length > 1) {
-                    html += `<li><strong>${parts[0].trim()}:</strong> ${parts.slice(1).join(':').trim()}</li>`;
-                } else {
-                    html += `<li>${step.trim()}</li>`;
-                }
-            }
-        });
-        return html;
-    }
+    // FIX: The custom renderSteps function is removed because the data-steps
+    // attribute already contains perfectly formatted HTML (<ol><li>...</li></ol>).
+    // Direct insertion of the HTML string is the correct approach.
 
     // Modal Logic
     const projects = document.querySelectorAll('.project');
@@ -706,7 +692,8 @@
     const modalProblem = document.getElementById('modalProblem');
     const modalData = document.getElementById('modalData');
     const modalTechTags = document.getElementById('modalTechTags');
-    const modalSteps = document.getElementById('modalSteps');
+    // FIX: Reference the new container ID
+    const modalStepsContainer = document.getElementById('modalStepsContainer');
     const modalImpact = document.getElementById('modalImpact');
     const modalSource = document.getElementById('modalSource');
     const modalClose = document.getElementById('modalClose');
@@ -717,7 +704,7 @@
             const title = project.dataset.title;
             const problem = project.dataset.problem;
             const data = project.dataset.data;
-            const steps = project.dataset.steps;
+            const steps = project.dataset.steps; // Contains "<ol><li>...</li></ol>"
             const impact = project.dataset.impact;
             const link = project.dataset.link;
             
@@ -733,8 +720,11 @@
             // Insert the existing tags HTML into the new modal section
             modalTechTags.innerHTML = tagsHtml; 
             
-            modalSteps.innerHTML = renderSteps(steps);
+            // FIX: Directly insert the steps HTML string into the container.
+            // This renders the <ol> and <li> tags correctly without extra bullets.
+            modalStepsContainer.innerHTML = steps; 
             
+            // Re-apply the bolding for impact text
             modalImpact.innerHTML = impact.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             modalSource.href = link;
             
