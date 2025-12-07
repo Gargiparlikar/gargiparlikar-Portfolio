@@ -411,8 +411,6 @@
                 <div class="bar"><i style="width:0%"></i></div>
             </div>
             
-            
-            
             <div class="skill" data-percent="80">
                  <div class="skill-content">
                     <i class="fa-solid fa-sitemap fa-xl" style="color:var(--accent);"></i>
@@ -537,6 +535,12 @@
             <p>Deep-dive analysis of 7,000+ orders to optimize staffing and kitchen operations.</p>
         </div>
         
+    </div>
+    
+    <h3 style="margin-top: 50px;">Other Projects</h3>
+
+    <div class="projects-grid">
+
         <div class="project" 
             data-project-id="jobs"
             data-title="Job Listings Data Scraper"
@@ -681,10 +685,6 @@
 </div>
 
 <script>
-    // FIX: The custom renderSteps function is removed because the data-steps
-    // attribute already contains perfectly formatted HTML (<ol><li>...</li></ol>).
-    // Direct insertion of the HTML string is the correct approach.
-
     // Modal Logic
     const projects = document.querySelectorAll('.project');
     const backdrop = document.getElementById('modalBackdrop');
@@ -692,7 +692,6 @@
     const modalProblem = document.getElementById('modalProblem');
     const modalData = document.getElementById('modalData');
     const modalTechTags = document.getElementById('modalTechTags');
-    // FIX: Reference the new container ID
     const modalStepsContainer = document.getElementById('modalStepsContainer');
     const modalImpact = document.getElementById('modalImpact');
     const modalSource = document.getElementById('modalSource');
@@ -720,8 +719,8 @@
             // Insert the existing tags HTML into the new modal section
             modalTechTags.innerHTML = tagsHtml; 
             
-            // FIX: Directly insert the steps HTML string into the container.
-            // This renders the <ol> and <li> tags correctly without extra bullets.
+            // FIX: Directly insert the steps HTML string into the container's innerHTML.
+            // This renders the <ol> and <li> tags correctly, displaying a clean numbered list.
             modalStepsContainer.innerHTML = steps; 
             
             // Re-apply the bolding for impact text
